@@ -29,7 +29,7 @@
           Data
         </label>
         <div class="input-wrap relative">
-          <input id="task-data-limite" type="date" maxlength="256" v-model="form.data_limite"
+          <input id="task-data-limite" type="datetime-local" maxlength="256" v-model="form.data_limite"
             @focus="focus.data_limite = true" @blur="focus.data_limite = false"
             class="input"
             autocomplete="off" />
@@ -77,8 +77,6 @@ export default {
 
     // Atualizar formulário quando task prop mudar (modo edição)
     watch(() => props.task, (newTask, oldTask) => {
-      console.log('TaskForm - task prop mudou:', { newTask, oldTask })
-      
       if (newTask) {
         // Modo edição
         form.value = {
@@ -94,8 +92,12 @@ export default {
     }, { immediate: true })
 
     const handleSubmit = () => {
-      console.log('TaskForm - handleSubmit chamado com dados:', form.value)
-      
+      // valide os campos
+      if (!form.value.nome) {
+        alert('O campo título é obrigatório')
+        return
+      }
+
       const taskData = {
         nome: form.value.nome,
         descricao: form.value.descricao,
@@ -107,7 +109,6 @@ export default {
         taskData.data_limite = new Date(form.value.data_limite).toISOString()
       }
 
-      console.log('TaskForm - emitindo dados:', taskData)
       emit('submit', taskData)
     }
 

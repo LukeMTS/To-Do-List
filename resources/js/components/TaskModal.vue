@@ -79,41 +79,29 @@ export default {
     }
 
     const handleSave = async () => {
-      console.log('TaskModal - handleSave chamado')
-      console.log('TaskModal - formData atual:', formData.value)
-      console.log('TaskModal - editingTask:', props.editingTask)
-      
       // Proteção contra múltiplas chamadas simultâneas
       if (loading.value) {
-        console.log('TaskModal - Salvamento já em andamento, ignorando chamada')
         return
       }
       
       // Se não temos formData, vamos tentar obter do formulário
       if (!formData.value && taskFormRef.value) {
-        console.log('TaskModal - Chamando handleSubmit do TaskForm')
         taskFormRef.value.handleSubmit()
         return
       }
 
       if (!formData.value) {
-        console.log('TaskModal - Nenhum dado do formulário disponível')
         return
       }
 
       try {
-        console.log('TaskModal - Salvando dados:', formData.value)
-        
         // Verificar se é criação ou edição
         if (props.editingTask) {
-          console.log('TaskModal - Modo edição - atualizando tarefa ID:', props.editingTask.id)
           await taskStore.updateTask(props.editingTask.id, formData.value)
         } else {
-          console.log('TaskModal - Modo criação - criando nova tarefa')
           await taskStore.createTask(formData.value)
         }
         
-        console.log('TaskModal - Salvamento concluído com sucesso')
         formData.value = null // Limpar dados após salvar com sucesso
         closeModal()
       } catch (error) {
@@ -123,17 +111,12 @@ export default {
     }
 
     const handleFormSubmit = (data) => {
-      console.log('TaskModal - handleFormSubmit recebeu dados:', data)
-      console.log('TaskModal - formData anterior:', formData.value)
-      
       // Proteção contra múltiplas chamadas
       if (loading.value) {
-        console.log('TaskModal - Salvamento já em andamento, ignorando handleFormSubmit')
         return
       }
       
       formData.value = data
-      console.log('TaskModal - formData atualizado:', formData.value)
       handleSave()
     }
 

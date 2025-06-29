@@ -41,10 +41,8 @@ export default {
     const editingTask = ref(null)
 
     const openModal = (task = null) => {
-      console.log('Botão + clicado! Abrindo modal...', { task, isModalOpen: isModalOpen.value })
       editingTask.value = task
       isModalOpen.value = true
-      console.log('Modal aberta:', { isModalOpen: isModalOpen.value, editingTask: editingTask.value })
     }
 
     const closeModal = () => {

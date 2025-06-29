@@ -37,16 +37,11 @@ export const useTaskStore = defineStore('tasks', {
 
     // Criar nova tarefa
     async createTask(task) {
-      console.log('TaskStore - createTask chamado com dados:', task)
       this.loading = true
       this.error = null
       try {
         const response = await taskService.createTask(task)
-        console.log('TaskStore - Resposta da API:', response)
-        console.log('TaskStore - Tarefas antes de adicionar:', this.tasks.length)
         this.tasks.unshift(response.data) // Adiciona no início da lista
-        console.log('TaskStore - Tarefas após adicionar:', this.tasks.length)
-        console.log('TaskStore - Nova tarefa adicionada:', response.data)
         return response.data
       } catch (error) {
         this.error = error.response?.data?.message || 'Erro ao criar tarefa'

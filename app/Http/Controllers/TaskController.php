@@ -124,7 +124,6 @@ class TaskController extends Controller
     }
 
     /**
-     * Remove uma tarefa.
      * @param Task $task
      * @return JsonResponse
      */
