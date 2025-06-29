@@ -1,0 +1,73 @@
+/* Labels flutuantes para inputs */
+.input-wrap {
+  position: relative;
+  margin-bottom: 24px;
+}
+
+.input {
+  width: 100%;
+  padding: 20px 16px 8px 16px;
+  font-size: 16px;
+  border-radius: 6px;
+  border: 1px solid var(--colors--transparent-0-1);
+  background: #fff;
+  transition: border-color 0.2s;
+}
+
+.input:focus {
+  border-color: #1fb76c;
+  outline: none;
+}
+
+.field-label {
+  position: absolute;
+  left: 18px;
+  top: 22px;
+  font-size: 16px;
+  color: #888;
+  background: #fff;
+  padding: 0 4px;
+  pointer-events: none;
+  transition: 0.2s;
+}
+
+.input:focus + .field-label,
+.input:not(:placeholder-shown) + .field-label,
+.input:-webkit-autofill + .field-label {
+  top: 4px;
+  left: 12px;
+  font-size: 12px;
+  color: #1fb76c;
+  background: #fff;
+}
+
+/* Responsividade */
+@media (max-width: 767px) {
+  .container-modal.regular {
+    width: 98vw !important;
+    min-width: unset;
+    max-width: unset;
+    padding: 8px !important;
+  }
+  .input {
+    font-size: 15px;
+    padding: 18px 12px 6px 12px;
+  }
+  .field-label {
+    font-size: 15px;
+  }
+}
+
+@media (max-width: 479px) {
+  .container-modal.regular {
+    width: 100vw !important;
+    padding: 4px !important;
+  }
+  .input {
+    font-size: 14px;
+    padding: 16px 8px 4px 8px;
+  }
+  .field-label {
+    font-size: 14px;
+  }
+} 

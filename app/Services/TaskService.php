@@ -43,9 +43,7 @@ class TaskService
     public function createTask(array $data)
     {
         try {
-            $task = DB::transaction(function () use ($data) {
-                return Task::create($data);
-            });
+            $task = Task::create($data);
             
             $this->invalidateCache();
             return $task;
@@ -62,11 +60,9 @@ class TaskService
         try {
             $task = Task::findOrFail($id);
             
-            DB::transaction(function () use ($task, $data) {
-                $task->update($data);
-            });
+            $task->update($data);
             
-            $this->invalidateCache();
+            $this->invalidateCache($id);
             return $task->fresh();
         } catch (ModelNotFoundException $e) {
             throw new ModelNotFoundException('Tarefa não encontrada.');
@@ -84,7 +80,7 @@ class TaskService
             $task = Task::findOrFail($id);
             $task->delete();
             
-            $this->invalidateCache();
+            $this->invalidateCache($id);
             return true;
         } catch (ModelNotFoundException $e) {
             throw new ModelNotFoundException('Tarefa não encontrada.');
@@ -105,10 +101,10 @@ class TaskService
             
             // Disparar job de exclusão se finalizada
             if ($task->finalizado) {
-                DeleteCompletedTask::dispatch($task->id)->delay(now()->addMinutes(10));
+                DeleteCompletedTask::dispatch($task->id)->delay(30);
             }
             
-            $this->invalidateCache();
+            $this->invalidateCache($id);
             return $task;
         } catch (ModelNotFoundException $e) {
             throw new ModelNotFoundException('Tarefa não encontrada.');
@@ -120,10 +116,12 @@ class TaskService
     /**
      * Invalidate all task cache
      */
-    private function invalidateCache()
+    private function invalidateCache($id = null)
     {
         Cache::forget('tasks:index');
-        // Limpar cache de tarefas individuais (opcional - mais granular)
-        // Cache::flush(); // Limpa todo o cache se necessário
+
+        if ($id) {
+            Cache::forget("tasks:show:$id");
+        }
     }
 } 
