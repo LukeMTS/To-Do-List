@@ -1,0 +1,167 @@
+{
+	"info": {
+		"_postman_id": "b02b5515-85b8-416e-a961-298154203edd",
+		"name": "✅ To-Do List API – Postman Collection",
+		"description": "## 📦 Observações\n\n- No projeto, está configurada a porta 8000.\n    \n\n---\n\n## 🔐 Variáveis de Ambiente\n\nNas requests, estão sendo usadas as seguintes variáveis:\n\n| Variável | Valor Exemplo |\n| --- | --- |\n| `host` | `http://localhost:8000` |\n\n---\n\n## 📚 Endpoints Disponíveis\n\n### 🔹 Criar Tarefa\n\n- **Método:** `POST`\n    \n- **URL:** `{{ host }}/api/tasks`\n    \n- **Body (JSON):**\n    \n\n``` json\n{\n  \"nome\": \"Comprar mantimentos\",\n  \"descricao\": \"Leite, ovos, frutas\",\n  \"finalizado\": false,\n  \"data_limite\": \"2025-07-01\"\n}\n\n ```\n\n### 🔹 Listar Todas as Tarefas\n\n- **Método:** `GET`\n    \n- **URL:** `{{ host }}/api/tasks`\n    \n- **Body (JSON):** Não há.\n    \n\n### 🔹 Listar Tarefa Específica\n\n- **Método:** `GET`\n    \n- **URL:** `{{ host }}/api/tasks/{id}`\n    \n- **Exemplo:** `{{ host }}/api/tasks/4`\n    \n- **Body (JSON):** Não há.\n    \n\n### 🔹 Atualizar Tarefa\n\n- **Método:** `PUT`\n    \n- **URL:** `{{ host }}/api/tasks/{id}`\n    \n- **Exemplo:** `{{host}}/api/tasks/4`\n    \n- **Body (JSON):**\n    \n\n``` json\n{\n  \"nome\": \"Comprar mantimentos\",\n  \"descricao\": \"Leite, pão, ovos e frutas\",\n  \"finalizado\": false,\n  \"data_limite\": \"2025-07-01\"\n}\n\n ```\n\n### 🔹 Excluir Tarefa\n\n- **Método:** `DELETE`\n    \n- **URL:** `{{ host }}/api/tasks/{id}`\n    \n- **Exemplo:** `{{ host }}/api/tasks/4`\n    \n- **Body (JSON):** Não há.\n    \n\n### 🔹 Ativar/Desativar Tarefa\n\n- **Método:** `PATCH`\n    \n- **URL:** `{{ host }}/api/tasks/{id}/toggle`\n    \n- **Exemplo:** `{{ host }}/api/tasks/5/toggle`\n    \n- **Body (JSON):** Não há.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "24380930"
+	},
+	"item": [
+		{
+			"name": "Lista de tasks",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{ host }}/api/tasks",
+					"host": [
+						"{{ host }}"
+					],
+					"path": [
+						"api",
+						"tasks"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Listar task específica",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{ host }}/api/tasks/4",
+					"host": [
+						"{{ host }}"
+					],
+					"path": [
+						"api",
+						"tasks",
+						"4"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Excluir task",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{ host }}/api/tasks/4",
+					"host": [
+						"{{ host }}"
+					],
+					"path": [
+						"api",
+						"tasks",
+						"4"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Ativar/Desativar task",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "PATCH",
+				"header": [],
+				"url": {
+					"raw": "{{ host }}/api/tasks/5/toggle",
+					"host": [
+						"{{ host }}"
+					],
+					"path": [
+						"api",
+						"tasks",
+						"5",
+						"toggle"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Nova task",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"nome\": \"Comprar mantimentos\",\r\n  \"descricao\": \"Leite, pão, ovos e frutas\",\r\n  \"finalizado\": false,\r\n  \"data_limite\": \"2025-07-01\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{ host }}/api/tasks",
+					"host": [
+						"{{ host }}"
+					],
+					"path": [
+						"api",
+						"tasks"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Atualizar task",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"nome\": \"Comprar mantimentos\",\r\n  \"descricao\": \"Leite, pão, ovos e frutas\",\r\n  \"finalizado\": false,\r\n  \"data_limite\": \"2025-07-01\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{ host }}/api/tasks/4",
+					"host": [
+						"{{ host }}"
+					],
+					"path": [
+						"api",
+						"tasks",
+						"4"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"variable": [
+		{
+			"key": " host ",
+			"value": "http://srv749137.hstgr.cloud:8000",
+			"type": "default"
+		}
+	]
+}

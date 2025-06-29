@@ -1,6 +1,8 @@
 To-Do List
 API e aplicação web para gerenciar uma lista de tarefas.
 
+Está disponível uma collection do postman neste diretório.
+
 Este projeto foi desenvolvido como teste técnico para uma vaga de desenvolvedor.
 
 🚀 Tecnologias Utilizadas
